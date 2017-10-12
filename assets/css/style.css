@@ -37,12 +37,9 @@ header button {
     background: #99bbff;
     border: none;
     border-radius: 5px;
-    outline-color: #fff;
+    outline: none;
     position: absolute;
-}
-
-header button:hover {
-    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 header button svg {
@@ -53,6 +50,16 @@ header button svg {
 
 header button svg path {
     fill: #fff;
+    transition: all 0.3s ease;
+}
+
+header button:hover {
+    cursor: pointer;
+    background: #fff;
+}
+
+header button:hover svg path {
+    fill: #99bbff;
 }
 
 .container {
@@ -68,8 +75,8 @@ header button svg path {
 }
 
 .container ul li {
-    background: #99bbff;
-    padding: 15px;
+    background: #fff;
+    padding: 20px 10px;
     margin-top: 10px;
     position: relative;
     border-radius: 5px;
@@ -79,18 +86,63 @@ header button svg path {
     position: absolute;
     top: 0;
     right: 0;
-    background: gray;
+    width: 100px;
     height: 100%;
-    width: 90px;
-    border-radius: 5px;
-}
-
-.container ul li .buttons svg {
-    width: 35px;
-    height: 35px;
-    margin-top: 5px;
-    margin-left: 5px;
+    text-align: center;
 }
 
 .container ul li .buttons .remove {
+    height: 36px;
+    width: 36px;
+    margin: 10px 12px 0 0;
+    background: none;
+    border: 2px solid #bfbfbf;
+    border-radius: 5px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.container ul li .buttons .remove svg {
+    height: 16px;
+    width: 16px;
+    margin-top: 2px;
+    fill: #bfbfbf;
+    transition: all 0.3s ease;
+}
+
+.container ul li .buttons .remove:hover {
+    cursor: pointer;
+    background: #ff3333;
+    border: 2px solid #ff3333;
+}
+
+.container ul li .buttons .remove:hover svg {
+    fill: #fff;
+}
+
+.container ul li .buttons .complete {
+    height: 36px;
+    width: 36px;
+    background: none;
+    border: 2px solid #6699ff;
+    border-radius: 5px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.container ul li .buttons .complete svg {
+    height: 18px;
+    width: 18px;
+    margin-top: 1px;
+    fill: #6699ff;
+    transition: all 0.3s ease;
+}
+
+.container ul li .buttons .complete:hover {
+    cursor: pointer;
+    background: #6699ff;
+}
+
+.container ul li .buttons .complete:hover svg {
+    fill: #fff;
 }
