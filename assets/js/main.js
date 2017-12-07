@@ -9,13 +9,9 @@ if (localStorage.getItem("list")) {
 
 loadList();
 
-function updateLocalStorage() {
-    localStorage.setItem("list", JSON.stringify(storage));
-}
-
 function loadList() {
     if (!storage.toDo.length && !storage.completed.length) {
-        console.log("empty");
+        return;
     } else {
         for (var i = 0; i < storage.toDo.length; i++) {
             renderTaskToDom(storage.toDo[i], "toDoList");
@@ -23,7 +19,6 @@ function loadList() {
         for (var i = storage.completed.length - 1; i >= 0; i--) {
             renderTaskToDom(storage.completed[i], "completedList");
         }
-        console.log(storage);
     }
 }
 
@@ -48,19 +43,19 @@ function renderTaskToDom(taskValue, taskList) {
     list.appendChild(task);
 }
 
+function updateLocalStorage() {
+    localStorage.setItem("list", JSON.stringify(storage));
+}
+
 function addTaskToList() {
     var value = document.getElementById("input").value;
     if(value) {
         document.getElementById("input").value = "";
-
         renderTaskToDom(value, "toDoList");
-
         storage.toDo.push(value);
         updateLocalStorage();
-        console.log(storage);
     }
 }
-
 document.getElementById("input").addEventListener("keyup", function(e) {
     e.preventDefault();
     if (e.keyCode == 13) {
@@ -69,20 +64,6 @@ document.getElementById("input").addEventListener("keyup", function(e) {
     }
 });
 
-function removeTask() {
-    var parent = this.parentNode.parentNode.parentNode;
-    var child = this.parentNode.parentNode;
-    parent.removeChild(child);
-
-    if(parent.id === "toDoList") {
-        storage.toDo.splice(storage.toDo.indexOf(child.textContent), 1);
-    } else {
-        storage.completed.splice(storage.completed.indexOf(child.textContent), 1);
-    }
-    updateLocalStorage();
-    console.log(storage);
-}
-
 function completeTask() {
     var parent = this.parentNode.parentNode.parentNode;
     var child = this.parentNode.parentNode;
@@ -90,19 +71,27 @@ function completeTask() {
         parent.removeChild(child);
         var completedList = document.getElementById("completedList");
         completedList.insertBefore(child, completedList.childNodes[0]);
-
         storage.toDo.splice(storage.toDo.indexOf(child.textContent), 1);
         storage.completed.push(child.textContent);
         updateLocalStorage();
-        console.log(storage);
     } else {
         parent.removeChild(child);
         var toDoList = document.getElementById("toDoList");
         toDoList.appendChild(child);
-
         storage.completed.splice(storage.completed.indexOf(child.textContent), 1);
         storage.toDo.push(child.textContent);
         updateLocalStorage();
-        console.log(storage);
     }
+}
+
+function removeTask() {
+    var parent = this.parentNode.parentNode.parentNode;
+    var child = this.parentNode.parentNode;
+    parent.removeChild(child);
+    if(parent.id === "toDoList") {
+        storage.toDo.splice(storage.toDo.indexOf(child.textContent), 1);
+    } else {
+        storage.completed.splice(storage.completed.indexOf(child.textContent), 1);
+    }
+    updateLocalStorage();
 }
